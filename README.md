@@ -127,7 +127,7 @@ You will get the result in the directory: `work_dirs/[DATASET]/xxx/vis`.
 ## Citation
 
 ```BibTeX
-
+paper on the way.
 ```
 
 ## Thanks
