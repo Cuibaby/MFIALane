@@ -1,29 +1,24 @@
-# RESA 
-PyTorch implementation of the paper "[RESA: Recurrent Feature-Shift Aggregator for Lane Detection](https://arxiv.org/abs/2008.13719)".
+# MFIALan
+PyTorch implementation of the paper "[MFIALane: Multi-scale Feature Information
+Aggregator Network for Lane Detection]".
 
-Our paper has been accepted by AAAI2021.
-
-**News**: We also release RESA on [LaneDet](https://github.com/Turoad/lanedet). It's also recommended for you to try LaneDet.
 
 ## Introduction
 ![intro](intro.png "intro")
-- RESA shifts sliced
-feature map recurrently in vertical and horizontal directions
-and enables each pixel to gather global information.
-- RESA achieves SOTA results on CULane and Tusimple Dataset.
+- MFIALan achieves SOTA results on VIL-100, CULane, and Tusimple Dataset.
 
 ## Get started
-1. Clone the RESA repository
+1. Clone the MFIALan repository
     ```
-    git clone https://github.com/zjulearning/resa.git
+    git clone https://github.com/Cuibaby/MFIALane.git
     ```
-    We call this directory as `$RESA_ROOT`
+    We call this directory as `$MFIALan_ROOT`
 
 2. Create a conda virtual environment and activate it (conda is optional)
 
     ```Shell
-    conda create -n resa python=3.8 -y
-    conda activate resa
+    conda create -n MFIALan python=3.8 -y
+    conda activate MFIALan
     ```
 
 3. Install dependencies
@@ -80,7 +75,7 @@ and enables each pixel to gather global information.
     
     Then compile the evaluation tool of CULane.
     ```Shell
-    cd $RESA_ROOT/runner/evaluator/culane/lane_evaluation
+    cd $MFIALane_ROOT/runner/evaluator/culane/lane_evaluation
     make
     cd -
     ```
@@ -117,7 +112,7 @@ python main.py configs/tusimple.py --validate --load_from tusimple_resnet34.pth 
 
 
 We provide two trained ResNet models on CULane and Tusimple, downloading our best performed model (Tusimple: [GoogleDrive](https://drive.google.com/file/d/1M1xi82y0RoWUwYYG9LmZHXWSD2D60o0D/view?usp=sharing)/[BaiduDrive(code:s5ii)](https://pan.baidu.com/s/1CgJFrt9OHe-RUNooPpHRGA),
-CULane: [GoogleDrive](https://drive.google.com/file/d/1pcqq9lpJ4ixJgFVFndlPe42VgVsjgn0Q/view?usp=sharing)/[BaiduDrive(code:rlwj)](https://pan.baidu.com/s/1ODKAZxpKrZIPXyaNnxcV3g)
+CULane: [GoogleDrive](https://drive.google.com/file/d/1pcqq9lpJ4ixJgFVFndlPe42VgVsjgn0Q/view?usp=sharing)/[BaiduDrive(code:rlwj)](https://pan.baidu.com/s/1ODKAZxpKrZIPXyaNnxcV3g), VIL-100: [GoogleDrive](https://drive.google.com/file/d/1M1xi82y0RoWUwYYG9LmZHXWSD2D60o0D/view?usp=sharing)/[BaiduDrive(code:s5ii)](https://pan.baidu.com/s/1CgJFrt9OHe-RUNooPpHRGA)
 )
 
 ## Visualization
@@ -132,16 +127,9 @@ You will get the result in the directory: `work_dirs/[DATASET]/xxx/vis`.
 ## Citation
 
 ```BibTeX
-@misc{zheng2020resa,
-      title={RESA: Recurrent Feature-Shift Aggregator for Lane Detection}, 
-      author={Tu Zheng and Hao Fang and Yi Zhang and Wenjian Tang and Zheng Yang and Haifeng Liu and Deng Cai},
-      year={2020},
-      eprint={2008.13719},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
-}
+paper on the way.
 ```
 
-<!-- ## Thanks
+## Thanks
 
-The evaluation code is modified from [SCNN](https://github.com/XingangPan/SCNN) and [Tusimple Benchmark](https://github.com/TuSimple/tusimple-benchmark). -->
+The evaluation code is modified from [SCNN](https://github.com/XingangPan/SCNN), [Tusimple Benchmark](https://github.com/TuSimple/tusimple-benchmark) and [RESA](https://github.com/zjulearning/resa.git). It's also recommended for you to try  [LaneDet](https://github.com/Turoad/lanedet). 
