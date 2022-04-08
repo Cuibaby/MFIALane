@@ -2,9 +2,10 @@
 PyTorch implementation of the paper "[MFIALane: Multi-scale Feature Information
 Aggregator Network for Lane Detection]".
 
-
+## VIL-100 demo
+![demo](demo/demo.mp4)
 ## Introduction
-![intro](intro.png "intro")
+![intro](arch.png "intro")
 - MFIALan achieves SOTA results on VIL-100, CULane, and Tusimple Dataset.
 
 ## Get started
