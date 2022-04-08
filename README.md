@@ -6,20 +6,20 @@ Aggregator Network for Lane Detection]".
 ![demo](./demo/demo.mp4 "vil-100 demo")
 ## Introduction
 ![intro](arch.png "intro")
-- MFIALan achieves SOTA results on VIL-100, CULane, and Tusimple Dataset.
+- MFIALane achieves SOTA results on VIL-100, CULane, and Tusimple Dataset.
 
 ## Get started
-1. Clone the MFIALan repository
+1. Clone the MFIALane repository
     ```
     git clone https://github.com/Cuibaby/MFIALane.git
     ```
-    We call this directory as `$MFIALan_ROOT`
+    We call this directory as `$MFIALane_ROOT`
 
 2. Create a conda virtual environment and activate it (conda is optional)
 
     ```Shell
-    conda create -n MFIALan python=3.8 -y
-    conda activate MFIALan
+    conda create -n MFIALane python=3.8 -y
+    conda activate MFIALane
     ```
 
 3. Install dependencies
@@ -40,7 +40,7 @@ Aggregator Network for Lane Detection]".
     Download [CULane](https://xingangpan.github.io/projects/CULane.html) and [Tusimple](https://github.com/TuSimple/tusimple-benchmark/issues/3). Then extract them to `$CULANEROOT` and `$TUSIMPLEROOT`. Create link to `data` directory.
     
     ```Shell
-    cd $RESA_ROOT
+    cd $MFIALane_ROOT
     mkdir -p data
     ln -s $CULANEROOT data/CULane
     ln -s $TUSIMPLEROOT data/tusimple
