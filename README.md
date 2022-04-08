@@ -2,6 +2,8 @@
 PyTorch implementation of the paper "[MFIALane: Multi-scale Feature Information
 Aggregator Network for Lane Detection]".
 
+<video width="718" alt="arch" src="https://github.com/Cuibaby/MFIALane//demo/demo.mp4">
+
 ## VIL-100 demo
 ![demo](./demo/demo.mp4 "vil-100 demo")
 ## Introduction
