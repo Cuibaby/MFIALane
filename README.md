@@ -4,7 +4,7 @@ Aggregator Network for Lane Detection]".
 
 
 ## VIL-100 demo
-![demo]https://user-images.githubusercontent.com/39958763/162392004-0dbfcfb9-ee63-4a9d-8a79-0414043ee3de.mp4
+https://user-images.githubusercontent.com/39958763/162392004-0dbfcfb9-ee63-4a9d-8a79-0414043ee3de.mp4
 
 
 ## Introduction
