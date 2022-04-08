@@ -1,9 +1,7 @@
 # RESA 
-PyTorch implementation of the paper "[RESA: Recurrent Feature-Shift Aggregator for Lane Detection](https://arxiv.org/abs/2008.13719)".
+PyTorch implementation of the paper "[MFIALane: Multi-scale Feature Information
+Aggregator Network for Lane Detection]".
 
-Our paper has been accepted by AAAI2021.
-
-**News**: We also release RESA on [LaneDet](https://github.com/Turoad/lanedet). It's also recommended for you to try LaneDet.
 
 ## Introduction
 ![intro](intro.png "intro")
@@ -15,7 +13,7 @@ and enables each pixel to gather global information.
 ## Get started
 1. Clone the RESA repository
     ```
-    git clone https://github.com/zjulearning/resa.git
+    git clone https://github.com/Cuibaby/MFIALane.git
     ```
     We call this directory as `$RESA_ROOT`
 
@@ -117,7 +115,7 @@ python main.py configs/tusimple.py --validate --load_from tusimple_resnet34.pth 
 
 
 We provide two trained ResNet models on CULane and Tusimple, downloading our best performed model (Tusimple: [GoogleDrive](https://drive.google.com/file/d/1M1xi82y0RoWUwYYG9LmZHXWSD2D60o0D/view?usp=sharing)/[BaiduDrive(code:s5ii)](https://pan.baidu.com/s/1CgJFrt9OHe-RUNooPpHRGA),
-CULane: [GoogleDrive](https://drive.google.com/file/d/1pcqq9lpJ4ixJgFVFndlPe42VgVsjgn0Q/view?usp=sharing)/[BaiduDrive(code:rlwj)](https://pan.baidu.com/s/1ODKAZxpKrZIPXyaNnxcV3g)
+CULane: [GoogleDrive](https://drive.google.com/file/d/1pcqq9lpJ4ixJgFVFndlPe42VgVsjgn0Q/view?usp=sharing)/[BaiduDrive(code:rlwj)](https://pan.baidu.com/s/1ODKAZxpKrZIPXyaNnxcV3g), VIL-100: [GoogleDrive](https://drive.google.com/file/d/1M1xi82y0RoWUwYYG9LmZHXWSD2D60o0D/view?usp=sharing)/[BaiduDrive(code:s5ii)](https://pan.baidu.com/s/1CgJFrt9OHe-RUNooPpHRGA)
 )
 
 ## Visualization
@@ -132,16 +130,9 @@ You will get the result in the directory: `work_dirs/[DATASET]/xxx/vis`.
 ## Citation
 
 ```BibTeX
-@misc{zheng2020resa,
-      title={RESA: Recurrent Feature-Shift Aggregator for Lane Detection}, 
-      author={Tu Zheng and Hao Fang and Yi Zhang and Wenjian Tang and Zheng Yang and Haifeng Liu and Deng Cai},
-      year={2020},
-      eprint={2008.13719},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
-}
+
 ```
 
 <!-- ## Thanks
 
-The evaluation code is modified from [SCNN](https://github.com/XingangPan/SCNN) and [Tusimple Benchmark](https://github.com/TuSimple/tusimple-benchmark). -->
+The evaluation code is modified from [SCNN](https://github.com/XingangPan/SCNN), [Tusimple Benchmark](https://github.com/TuSimple/tusimple-benchmark) and [RESA](https://github.com/zjulearning/resa.git). It's also recommended for you to try  [LaneDet](https://github.com/Turoad/lanedet). -->
