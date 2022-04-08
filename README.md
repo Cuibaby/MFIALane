@@ -1,27 +1,24 @@
-# RESA 
+# MFIALan
 PyTorch implementation of the paper "[MFIALane: Multi-scale Feature Information
 Aggregator Network for Lane Detection]".
 
 
 ## Introduction
 ![intro](intro.png "intro")
-- RESA shifts sliced
-feature map recurrently in vertical and horizontal directions
-and enables each pixel to gather global information.
-- RESA achieves SOTA results on CULane and Tusimple Dataset.
+- MFIALan achieves SOTA results on VIL-100, CULane, and Tusimple Dataset.
 
 ## Get started
-1. Clone the RESA repository
+1. Clone the MFIALan repository
     ```
     git clone https://github.com/Cuibaby/MFIALane.git
     ```
-    We call this directory as `$RESA_ROOT`
+    We call this directory as `$MFIALan_ROOT`
 
 2. Create a conda virtual environment and activate it (conda is optional)
 
     ```Shell
-    conda create -n resa python=3.8 -y
-    conda activate resa
+    conda create -n MFIALan python=3.8 -y
+    conda activate MFIALan
     ```
 
 3. Install dependencies
@@ -78,7 +75,7 @@ and enables each pixel to gather global information.
     
     Then compile the evaluation tool of CULane.
     ```Shell
-    cd $RESA_ROOT/runner/evaluator/culane/lane_evaluation
+    cd $MFIALane_ROOT/runner/evaluator/culane/lane_evaluation
     make
     cd -
     ```
