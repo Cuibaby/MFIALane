@@ -40,11 +40,12 @@ https://user-images.githubusercontent.com/39958763/162392004-0dbfcfb9-ee63-4a9d-
 
 4. Data preparation
 
-    Download [CULane](https://xingangpan.github.io/projects/CULane.html) and [Tusimple](https://github.com/TuSimple/tusimple-benchmark/issues/3). Then extract them to `$CULANEROOT` and `$TUSIMPLEROOT`. Create link to `data` directory.
+    Download [VIL-100](https://github.com/yujun0-0/MMA-Net/tree/main/dataset), [CULane](https://xingangpan.github.io/projects/CULane.html) and [Tusimple](https://github.com/TuSimple/tusimple-benchmark/issues/3). Then extract them to  `$VIL-100ROOT` `$CULANEROOT` and `$TUSIMPLEROOT`. Create link to `data` directory.
     
     ```Shell
     cd $MFIALane_ROOT
     mkdir -p data
+    ln -s $VIL-100ROOT data/VIL-100
     ln -s $CULANEROOT data/CULane
     ln -s $TUSIMPLEROOT data/tusimple
     ```
@@ -115,9 +116,10 @@ python main.py configs/tusimple.py --validate --load_from tusimple_resnet34.pth 
 ```
 
 
-We provide two trained ResNet models on CULane and Tusimple, downloading our best performed model (Tusimple: [GoogleDrive](https://drive.google.com/file/d/1M1xi82y0RoWUwYYG9LmZHXWSD2D60o0D/view?usp=sharing)/[BaiduDrive(code:s5ii)](https://pan.baidu.com/s/1CgJFrt9OHe-RUNooPpHRGA),
+We provide two trained ResNet models on VIL-100, CULane and Tusimple, downloading our best performed model(comming soon).
+<!-- (Tusimple: [GoogleDrive](https://drive.google.com/file/d/1M1xi82y0RoWUwYYG9LmZHXWSD2D60o0D/view?usp=sharing)/[BaiduDrive(code:s5ii)](https://pan.baidu.com/s/1CgJFrt9OHe-RUNooPpHRGA),
 CULane: [GoogleDrive](https://drive.google.com/file/d/1pcqq9lpJ4ixJgFVFndlPe42VgVsjgn0Q/view?usp=sharing)/[BaiduDrive(code:rlwj)](https://pan.baidu.com/s/1ODKAZxpKrZIPXyaNnxcV3g), VIL-100: [GoogleDrive](https://drive.google.com/file/d/1M1xi82y0RoWUwYYG9LmZHXWSD2D60o0D/view?usp=sharing)/[BaiduDrive(code:s5ii)](https://pan.baidu.com/s/1CgJFrt9OHe-RUNooPpHRGA)
-)
+) -->
 
 ## Visualization
 Just add `--view`.
@@ -136,4 +138,4 @@ paper on the way.
 
 ## Thanks
 
-The evaluation code is modified from [SCNN](https://github.com/XingangPan/SCNN), [Tusimple Benchmark](https://github.com/TuSimple/tusimple-benchmark) and [RESA](https://github.com/zjulearning/resa.git). It's also recommended for you to try  [LaneDet](https://github.com/Turoad/lanedet). 
+The code is modified from [SCNN](https://github.com/XingangPan/SCNN), [Tusimple Benchmark](https://github.com/TuSimple/tusimple-benchmark) and [RESA](https://github.com/zjulearning/resa.git). It's also recommended for you to try  [LaneDet](https://github.com/Turoad/lanedet). 
