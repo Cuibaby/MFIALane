@@ -35,9 +35,7 @@ class Runner(object):
             self.metric = 0.9654
         if self.cfg.dataset.train.type == 'VILane':
             self.metric = 0.84
-        src = '/home/qiuzengyu/project/resa/models/resa.py'
-        dst = self.recorder.work_dir
-        shutil.copy2(src,dst)
+        
     def resume(self):
         if not self.cfg.load_from and not self.cfg.finetune_from:
             return
@@ -82,7 +80,6 @@ class Runner(object):
                 self.recorder.record('train')
 
     def train(self):
-        torch.manual_seed(6666)
         self.recorder.logger.info('start training...')
         self.trainer = build_trainer(self.cfg)
         train_loader = build_dataloader(self.cfg.dataset.train, self.cfg, is_train=True)
@@ -105,11 +102,6 @@ class Runner(object):
             with torch.no_grad():
                 output = self.net(data['img'])
                 
-              #  if self.cfg.dataset.train.type == 'VILane':
-                 #  print(output['seg'].shape)
-              #     write_mask(output['seg'],data)
-                  
-             #   else:
                 self.evaluator.evaluate(val_loader.dataset, output, data)
 
         metric = self.evaluator.summarize()
