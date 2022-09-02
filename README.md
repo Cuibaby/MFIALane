@@ -1,6 +1,7 @@
 # MFIALane
 PyTorch implementation of the paper "[MFIALane: Multi-scale Feature Information
-Aggregator Network for Lane Detection]".
+Aggregator Network for Lane Detection]". 
+Good news! ! ! Our paper was accepted by IEEE Transactions on Intelligent Transportation Systems.
 
 
 ## VIL-100 demo
@@ -133,7 +134,16 @@ You will get the result in the directory: `work_dirs/[DATASET]/xxx/vis`.
 ## Citation
 
 ```BibTeX
-paper on the way.
+@ARTICLE{9872124,  
+author={Qiu, Zengyu and Zhao, Jing and Sun, Shiliang},  
+journal={IEEE Transactions on Intelligent Transportation Systems},   
+title={MFIALane: Multiscale Feature Information Aggregator Network for Lane Detection},   
+year={2022},  
+volume={},  
+number={},  
+pages={1-13},  
+doi={10.1109/TITS.2022.3195742}
+}
 ```
 
 ## Thanks
