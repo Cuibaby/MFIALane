@@ -148,4 +148,4 @@ doi={10.1109/TITS.2022.3195742}
 
 ## Thanks
 
-The code is modified from [SCNN](https://github.com/XingangPan/SCNN), [Tusimple Benchmark](https://github.com/TuSimple/tusimple-benchmark) and [RESA](https://github.com/zjulearning/resa.git). It's also recommended for you to try  [LaneDet](https://github.com/Turoad/lanedet). 
+The code is modified from [RESA](https://github.com/zjulearning/resa.git) and [SCNN](https://github.com/XingangPan/SCNN), [Tusimple Benchmark](https://github.com/TuSimple/tusimple-benchmark). It's also recommended for you to try  [LaneDet](https://github.com/Turoad/lanedet). 
