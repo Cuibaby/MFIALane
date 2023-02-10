@@ -6,9 +6,9 @@ from models.registry import NET
 from .resnet import ResNetWrapper 
 from .decoder import BUSD, PlainDecoder 
 
-class ASPP_module(nn.Module):
+class ASPPNet(nn.Module):
     def __init__(self, inplanes, planes, dilation):
-        super(ASPP_module, self).__init__()
+        super(ASPPNet, self).__init__()
         if dilation == 1:
             kernel_size = 1
             padding = 0
@@ -51,14 +51,14 @@ class MFIA(nn.Module):
         dilations = [1,2,4,8]
         self.global_avg_pool = nn.Sequential(nn.AdaptiveAvgPool2d((1, 1)))
         for i in range(self.iter):
-            conv_vert1 = ASPP_module(chan, chan, dilation=dilations[0])
-            conv_vert2 = ASPP_module(chan, chan, dilation=dilations[1])
+            conv_vert1 = ASPPNet(chan, chan, dilation=dilations[0])
+            conv_vert2 = ASPPNet(chan, chan, dilation=dilations[1])
 
             setattr(self, 'conv_d'+str(i), conv_vert1)
             setattr(self, 'conv_u'+str(i), conv_vert2)
 
-            conv_hori1 = ASPP_module(chan, chan, dilation=dilations[2])
-            conv_hori2 = ASPP_module(chan, chan, dilation=dilations[3])
+            conv_hori1 = ASPPNet(chan, chan, dilation=dilations[2])
+            conv_hori2 = ASPPNet(chan, chan, dilation=dilations[3])
             setattr(self, 'conv_r'+str(i), conv_hori1)
             setattr(self, 'conv_l'+str(i), conv_hori2)
 
