@@ -13,9 +13,9 @@ backbone = dict(
 )
 
 mfia = dict(
-    type='RESA',
+    type='MFIA',
     alpha=2.0,
-    iter=5,
+    iter=4,
     input_channel=128,
     conv_stride=9,
 )
@@ -23,7 +23,7 @@ mfia = dict(
 decoder = 'PlainDecoder'   #'BUSD'     #
 
 trainer = dict(
-    type='RESA'
+    type='MFIA'
 )
 
 evaluator = dict(
