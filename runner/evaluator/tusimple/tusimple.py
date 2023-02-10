@@ -37,7 +37,7 @@ class Tusimple(nn.Module):
             os.mkdir(self.out_path)
         self.dump_to_json = [] 
         self.thresh = cfg.thresh
-        self.logger = get_logger('resa')
+        self.logger = get_logger('MFIALane')
         if cfg.view:
             self.view_dir = os.path.join(self.cfg.work_dir, 'vis')
 
