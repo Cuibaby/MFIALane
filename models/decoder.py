@@ -7,7 +7,7 @@ class PlainDecoder(nn.Module):
         self.cfg = cfg
 
         self.dropout = nn.Dropout2d(0.1)
-        self.conv8 = nn.Conv2d(self.cfg.resa.input_channel, cfg.num_classes, 1)
+        self.conv8 = nn.Conv2d(self.cfg.mfia.input_channel, cfg.num_classes, 1)
 
     def forward(self, x):
         x = self.dropout(x)
