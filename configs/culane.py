@@ -13,7 +13,7 @@ backbone = dict(
 )
 
 maif = dict(
-    type='RESA',
+    type='MFIA',
     alpha=2.0,
     iter=2,
     input_channel=128,
@@ -23,7 +23,7 @@ maif = dict(
 decoder = 'PlainDecoder'        
 
 trainer = dict(
-    type='RESA'
+    type='MFIA'
 )
 
 evaluator = dict(
