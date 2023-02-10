@@ -37,16 +37,16 @@ class ASPP_module(nn.Module):
                 m.weight.data.fill_(1)
                 m.bias.data.zero_()
 
-class RESA(nn.Module):
+class MFIA(nn.Module):
     def __init__(self, cfg):
-        super(RESA, self).__init__()
-        self.iter = cfg.resa.iter
-        chan = cfg.resa.input_channel
+        super(MFIA, self).__init__()
+        self.iter = cfg.mfia.iter
+        chan = cfg.mfia.input_channel
         fea_stride = cfg.backbone.fea_stride
         self.height = cfg.img_height // fea_stride
         self.width = cfg.img_width // fea_stride
-        self.alpha = cfg.resa.alpha
-        conv_stride = cfg.resa.conv_stride
+        self.alpha = cfg.mfia.alpha
+        conv_stride = cfg.mfia.conv_stride
         
         dilations = [1,2,4,8]
         self.global_avg_pool = nn.Sequential(nn.AdaptiveAvgPool2d((1, 1)))
@@ -102,49 +102,40 @@ class DetailHead(nn.Module):
         self.cfg = cfg
         self.conv1x1 = nn.Conv2d(128, cfg.num_classes, kernel_size=1, stride=1, bias=False)
     def forward(self, x):
-      
         x = F.interpolate(x,size=[self.cfg.img_height,  self.cfg.img_width],
                            mode='bilinear', align_corners=False)
-        x = self.conv1x1(x) # 75.5
+        x = self.conv1x1(x) 
         return x
 
 class ExistHead(nn.Module):
     def __init__(self, cfg=None):
         super(ExistHead, self).__init__()
         self.cfg = cfg
-
         self.dropout = nn.Dropout2d(0.1)  
         self.fc = nn.Linear(128, cfg.num_classes-1)
-
     def forward(self, x):
         x = self.dropout(x)
         x = torch.squeeze(x)
         x = self.fc(x)
         x = torch.sigmoid(x)
-
         return x
 
 @NET.register_module
-class RESANet(nn.Module):
+class MFIALane(nn.Module):
     def __init__(self, cfg):
-        super(RESANet, self).__init__()
+        super(MFIALane, self).__init__()
         self.cfg = cfg
         self.backbone = ResNetWrapper(cfg)
-        self.resa = RESA(cfg)
-     #   self.thick = DetailHead(cfg)
+        self.mfia = MFIA(cfg)
         self.decoder = eval(cfg.decoder)(cfg)
-        self.heads = ExistHead(cfg) #heads
+        self.heads = ExistHead(cfg) 
         self.global_avg_pool = nn.Sequential(nn.AdaptiveAvgPool2d((1, 1)))
     def forward(self, batch):
-        fea = self.backbone(batch)
-        fea = self.resa(fea)
-     #   thick_seg = self.thick(fea)
-        avg_fea = self.global_avg_pool(fea) 
-        fea = fea * avg_fea
-      #  seg = self.thick(fea)
-        seg = self.decoder(fea)
-        exist = self.heads(avg_fea)
-      #  seg += 0.5*thick_seg 
+        feat = self.backbone(batch)
+        feat = self.mfia(feat)
+        avg_feat = self.global_avg_pool(feat) 
+        feat = feat * avg_feat
+        seg = self.decoder(feat)
+        exist = self.heads(avg_feat)
         output = {'seg': seg, 'exist': exist}
-
         return output
