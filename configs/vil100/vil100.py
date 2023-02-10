@@ -1,5 +1,5 @@
 net = dict(
-    type='RESANet'#
+    type='MFIALane'#
 )
 
 backbone = dict(
@@ -12,7 +12,7 @@ backbone = dict(
 #    in_channels=[64, 128, 256, -1],
 )
 
-resa = dict(
+mfia = dict(
     type='RESA',
     alpha=2.0,
     iter=2,
