@@ -94,7 +94,7 @@ class CULane(nn.Module):
         self.blur = torch.nn.Conv2d(
             5, 5, 9, padding=4, bias=False, groups=5).cuda()
         torch.nn.init.constant_(self.blur.weight, 1 / 81)
-        self.logger = get_logger('resa')
+        self.logger = get_logger('MFIALane')
         self.out_dir = os.path.join(self.cfg.work_dir, 'lines')
         if cfg.view:
             self.view_dir = os.path.join(self.cfg.work_dir, 'vis')
