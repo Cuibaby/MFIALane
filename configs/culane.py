@@ -1,10 +1,10 @@
 net = dict(
-    type='Transformer', #'RESANet',
+    type='MFIALane', 
 )
 
 backbone = dict(
     type='ResNetWrapper',
-    resnet='resnet50',
+    resnet='resnet34',
     pretrained=True,
     replace_stride_with_dilation=[False, True, True],
     out_conv=True,
@@ -12,7 +12,7 @@ backbone = dict(
     in_channels=[64, 128, 256, -1],
 )
 
-resa = dict(
+maif = dict(
     type='RESA',
     alpha=2.0,
     iter=2,
