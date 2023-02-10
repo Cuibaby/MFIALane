@@ -42,7 +42,7 @@ class Recorder(object):
         cfg.work_dir = self.work_dir
         self.log_path = os.path.join(self.work_dir, 'log.txt')
 
-        self.logger = get_logger('resa', self.log_path)
+        self.logger = get_logger('MFIALane', self.log_path)
         self.logger.info('Config: \n' + cfg.text)
 
         # scalars
