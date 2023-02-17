@@ -109,7 +109,7 @@ class BUSD(nn.Module):
         
         self.layers = nn.ModuleList()
 
-        self.layers.append(UpsamplerBlock(ninput=cfg.resa.input_channel, noutput=64,
+        self.layers.append(UpsamplerBlock(ninput=cfg.mfia.input_channel, noutput=64,
                                           up_height=int(img_height)//4, up_width=int(img_width)//4))
         self.layers.append(UpsamplerBlock(ninput=64, noutput=32,
                                           up_height=int(img_height)//2, up_width=int(img_width)//2))
