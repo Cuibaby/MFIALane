@@ -12,7 +12,7 @@ backbone = dict(
     in_channels=[64, 128, 256, -1],
 )
 
-maif = dict(
+mfia = dict(
     type='MFIA',
     alpha=2.0,
     iter=2,
