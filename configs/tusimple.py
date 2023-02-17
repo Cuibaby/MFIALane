@@ -4,7 +4,7 @@ net = dict(
 
 backbone = dict(
     type='ResNetWrapper',
-    resnet='resnet34',
+    resnet='resnet18',
     pretrained=True,
     replace_stride_with_dilation=[False, True, True],
     out_conv=True,
@@ -15,12 +15,12 @@ backbone = dict(
 mfia = dict(
     type='MFIA',
     alpha=2.0,
-    iter=4,
+    iter=5,
     input_channel=128,
     conv_stride=9,
 )
 
-decoder = 'PlainDecoder'   #'BUSD'     #
+decoder = 'BUSD'   #'BUSD'     #
 
 trainer = dict(
     type='MFIA'
@@ -77,9 +77,9 @@ dataset = dict(
 
 loss_type = 'cross_entropy'
 seg_loss_weight = 4.5 # 1.5
-depth = 4
+depth = 5
 
-batch_size = 8
+batch_size = 16
 workers = 12
 num_classes = 6 + 1
 ignore_label = 255
