@@ -134,7 +134,7 @@ class ResNetWrapper(nn.Module):
                 out_channel = chan
                 break
             self.out = conv1x1(
-                out_channel * self.model.expansion, self.cfg.resa.input_channel)
+                out_channel * self.model.expansion, self.cfg.mfia.input_channel)
 
     def forward(self, x):
         x = self.model(x)
