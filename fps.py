@@ -18,6 +18,9 @@ from mmcv.cnn.utils import get_model_complexity_info
 def arg_set():
     parser = argparse.ArgumentParser(description='PyTorch MFIALane')
     parser.add_argument('config', help='train config file path')
+    parser.add_argument('--gpus', type=int, default=0, nargs='+',
+                        help='SGD momentum (default: 0.5)')
+
     args = parser.parse_args()
     return args
 
@@ -26,7 +29,6 @@ if __name__ == '__main__':
 
     args = arg_set()
     cfg = Config.fromfile(args.config)
-    torch.manual_seed(args.seed)
     torch.backends.cudnn.benchmark = True
    
     os.environ["CUDA_VISIBLE_DEVICES"] = ','.join(str(gpu) for gpu in args.gpus)
@@ -41,7 +43,7 @@ if __name__ == '__main__':
     net = torch.nn.DataParallel(net,device_ids=gpus_id).cuda()
     net.eval()
     
-    x = torch.zeros((1,3,368,640)).to(device) + 1
+    x = torch.zeros((1,3,cfg.img_height,cfg.img_width)).to(device) + 1
 
     t_all = []
     for i in range(100):
