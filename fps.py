@@ -16,29 +16,8 @@ from runner.recorder import build_recorder
 from runner.net_utils import save_model, load_network, load_network_specified
 from mmcv.cnn.utils import get_model_complexity_info
 def arg_set():
-    parser = argparse.ArgumentParser(description='PyTorch UNet-ConvLSTM')
-    parser.add_argument('--model',type=str, default='UNet',help='( UNet-ConvGRU | UNet | ')
+    parser = argparse.ArgumentParser(description='PyTorch MFIALane')
     parser.add_argument('config', help='train config file path')
-    parser.add_argument('--batch-size', type=int, default=32, metavar='N',
-                        help='input batch size for training (default: 10)')
-    parser.add_argument('--test-batch-size', type=int, default=32, metavar='N',
-                        help='input batch size for testing (default: 100)')
-    parser.add_argument('--epochs', type=int, default=30, metavar='N',
-                        help='number of epochs to train (default: 30)')
-    parser.add_argument('--lr', type=float, default=0.008, metavar='LR',
-                        help='learning rate (default: 0.01)')
-    parser.add_argument('--gpus', type=int, default=0, nargs='+',
-                        help='SGD momentum (default: 0.5)')
-    parser.add_argument('--momentum', type=float, default=0.5, metavar='M',
-                        help='SGD momentum (default: 0.5)')
-    parser.add_argument('--resume', type=bool, default=False,
-                        help='whether use last state')
-    parser.add_argument('--cuda', action='store_true', default=True,
-                        help='use CUDA training')
-    parser.add_argument('--seed', type=int, default=1, metavar='S',
-                        help='random seed (default: 1)')
-    parser.add_argument('--log-interval', type=int, default=10, metavar='N',
-                        help='how many batches to wait before logging training status')
     args = parser.parse_args()
     return args
 
@@ -62,9 +41,11 @@ if __name__ == '__main__':
     net = torch.nn.DataParallel(net,device_ids=gpus_id).cuda()
     net.eval()
     
-    x = torch.zeros((1,3,384,640)).to(device) + 1
+    x = torch.zeros((1,3,368,640)).to(device) + 1
 
     t_all = []
+    for i in range(100):
+        y = net(x)
     for i in range(100):
        t1 = time.time()
        y = net(x)
