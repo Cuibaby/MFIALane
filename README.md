@@ -134,9 +134,9 @@ We provide three trained ResNet models on VIL100, CULane and Tusimple.
 
 |  Dataset | Backbone| Metric paper | Metric This repo |    Model    |
 |:--------:|:------------:|:------------:|:----------------:|:-------------------:|
-| VIL100 |  ResNet34 |   90.5    |       90.5         | [GoogleDrive](https://drive.google.com/file/d/1KFBMxsneDjFkmCIwdI3iEVZdutEZiUfu/view?usp=sharing)/[BaiduDrive(code:bghd)](https://pan.baidu.com/s/1rPC_irYqccWvV0lCefXvTw?pwd=1111) |
-| Tusimple |  ResNet18 | 96.83    |       96.83      |   [GoogleDrive](https://drive.google.com/file/d/1vulUJP8sJ1oNZUAScyB6dqdjBrGnKivh/view?usp=sharing)/[BaiduDrive(code:bghd)](https://pan.baidu.com/s/1iGTfIZnyCaNn5Y9p_WMb8g?pwd=1111) |
-|  CULane  |  ResNet34 |   76.1    |       76.1       |    [GoogleDrive](https://drive.google.com/file/d/1zXBRTw50WOzvUp6XKsi8Zrk3MUC3uFuq/view?usp=sharing)/[BaiduDrive(code:w9tw)](https://pan.baidu.com/s/19Ig0TrV8MfmFTyCvbSa4ag) |
+| VIL100 |  ResNet34 |   90.5    |       90.5         | [GoogleDrive](https://drive.google.com/file/d/1KFBMxsneDjFkmCIwdI3iEVZdutEZiUfu/view?usp=sharing)/[BaiduDrive(code:1111)](https://pan.baidu.com/s/1rPC_irYqccWvV0lCefXvTw?pwd=1111) |
+| Tusimple |  ResNet18 | 96.83    |       96.83      |   [GoogleDrive](https://drive.google.com/file/d/1vulUJP8sJ1oNZUAScyB6dqdjBrGnKivh/view?usp=sharing)/[BaiduDrive(code:1111)](https://pan.baidu.com/s/1iGTfIZnyCaNn5Y9p_WMb8g?pwd=1111) |
+|  CULane  |  ResNet34 |   76.1    |       76.1       |    [GoogleDrive](https://drive.google.com/file/d/1zXBRTw50WOzvUp6XKsi8Zrk3MUC3uFuq/view?usp=sharing)/[BaiduDrive(code:1111)](https://pan.baidu.com/s/19Ig0TrV8MfmFTyCvbSa4ag) |
 
 ## Visualization
 Just add `--view`.
