@@ -98,7 +98,7 @@ https://user-images.githubusercontent.com/39958763/162392004-0dbfcfb9-ee63-4a9d-
     
     Note that, the default `opencv` version is 3. If you use opencv2, please modify the `OPENCV_VERSION := 3` to `OPENCV_VERSION := 2` in the `Makefile`.
     
-    If you have problems installing the C++ version, you can remove the $lane_evaluation and change the 'type=Py_CULane' in the config file to use the pure Python version for evaluation.
+    If you have problems installing the C++ version, you can remove the `lane_evaluation` and change the `type=Py_CULane` in the config file to use the pure Python version for evaluation.
 
 ## Training
 
