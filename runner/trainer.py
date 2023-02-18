@@ -16,9 +16,9 @@ def dice_loss(input, target):
 
 
 @TRAINER.register_module
-class MFAI(nn.Module):
+class MFIA(nn.Module):
     def __init__(self, cfg):
-        super(MFAI, self).__init__()
+        super(MFIA, self).__init__()
         self.cfg = cfg
         self.loss_type = cfg.loss_type
         if self.loss_type == 'cross_entropy':
