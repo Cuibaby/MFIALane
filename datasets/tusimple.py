@@ -10,7 +10,7 @@ from .registry import DATASETS
 @DATASETS.register_module
 class TuSimple(BaseDataset):
     def __init__(self, img_path, data_list, cfg=None):
-        super().__init__(img_path, data_list, 'seg_truth/list', cfg)
+        super().__init__(img_path, data_list, 'seg_label/list', cfg)
 
     def transform_train(self):
         input_mean = self.cfg.img_norm['mean']
