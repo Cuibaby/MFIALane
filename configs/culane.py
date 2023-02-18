@@ -9,7 +9,7 @@ backbone = dict(
     replace_stride_with_dilation=[False, True, True],
     out_conv=True,
     fea_stride=8,
-    in_channels=[64, 128, 256, -1],
+    # in_channels=[64, 128, 256, -1],
 )
 
 mfia = dict(
@@ -18,16 +18,17 @@ mfia = dict(
     iter=2,
     input_channel=128,
     conv_stride=9,
+    pointwise=True,
 )
 
 decoder = 'PlainDecoder'        
 
 trainer = dict(
-    type='MFIA'
+    type='Lane'
 )
 
 evaluator = dict(
-    type='CULane',        
+    type='Py_CULane',  #Py_CULane: If you have problems with the C++ version installation, you can evaluate with the pure Python version.
 )
 
 optimizer = dict(
@@ -37,9 +38,9 @@ optimizer = dict(
   momentum=0.9
 )
 
-epochs = 12
+epochs = 16
 batch_size = 8
-total_iter = (88880 // batch_size) * epochs
+total_iter = (98560 // batch_size) * epochs
 import math
 scheduler = dict(
     type = 'LambdaLR',

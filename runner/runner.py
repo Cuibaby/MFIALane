@@ -11,8 +11,7 @@ from .scheduler import build_scheduler
 from datasets import build_dataloader
 from .recorder import build_recorder
 from .net_utils import save_model, load_network, load_network_specified
-from .VIL import write_mask
-from mmcv.cnn.utils import get_model_complexity_info
+
 class Runner(object):
     def __init__(self, cfg):
         self.cfg = cfg
@@ -20,7 +19,7 @@ class Runner(object):
         self.recorder = build_recorder(self.cfg)
         self.net = build_net(self.cfg)
         parameters = sum(p.numel() for p in self.net.parameters() if p.requires_grad)
-        print('the model parameter is :', parameters / 1e6)
+        self.recorder.logger.info('the model parameter is : ' + str(parameters / 1e6) + 'M')
         self.net = torch.nn.parallel.DataParallel(
                 self.net, device_ids = range(self.cfg.gpus)).cuda()
         self.recorder.logger.info('Network: \n' + str(self.net))

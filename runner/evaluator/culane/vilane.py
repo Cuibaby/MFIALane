@@ -1,9 +1,8 @@
-
 import torch.nn as nn
 import torch
 import torch.nn.functional as F
 from runner.logger import get_logger
-
+import logging
 from runner.registry import EVALUATOR 
 import json
 import os
@@ -41,7 +40,7 @@ def call_culane_eval(data_dir, output_path='./output'):
     im_w=1640
     im_h=590
     frame=1
-    print('The IoU threshold is:', iou)
+    # print('The IoU threshold is:', iou)
     list_dir = os.listdir(os.path.join(data_dir,'test/list'))
     res_all = {}
     if not os.path.exists(os.path.join(output_path,'txt')):
@@ -69,7 +68,7 @@ class VILane(nn.Module):
         self.blur = torch.nn.Conv2d(
             9, 9, 9, padding=4, bias=False, groups=9).cuda()
         torch.nn.init.constant_(self.blur.weight, 1 / 81)
-        self.logger = get_logger('MFIALane')
+        self.logger = logging.getLogger(__name__)
         self.out_dir = os.path.join(self.cfg.work_dir, 'lines')
         if cfg.view:
             self.view_dir = os.path.join(self.cfg.work_dir, 'vis')

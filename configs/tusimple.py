@@ -18,12 +18,13 @@ mfia = dict(
     iter=5,
     input_channel=128,
     conv_stride=9,
+    pointwise=False,
 )
 
-decoder = 'BUSD'   #'BUSD'     #
+decoder = 'BUSD'   
 
 trainer = dict(
-    type='MFIA'
+    type='Lane'
 )
 
 evaluator = dict(
@@ -79,7 +80,7 @@ loss_type = 'cross_entropy'
 seg_loss_weight = 4.5 # 1.5
 depth = 5
 
-batch_size = 16
+batch_size = 8
 workers = 12
 num_classes = 6 + 1
 ignore_label = 255

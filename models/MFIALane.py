@@ -6,9 +6,9 @@ from models.registry import NET
 from .resnet import ResNetWrapper 
 from .decoder import BUSD, PlainDecoder 
 
-class ASPPNet(nn.Module):
-    def __init__(self, inplanes, planes, dilation):
-        super(ASPPNet, self).__init__()
+class ASPP_module(nn.Module):
+    def __init__(self, inplanes, planes, dilation, pointwise=False):
+        super(ASPP_module, self).__init__()
         if dilation == 1:
             kernel_size = 1
             padding = 0
@@ -19,14 +19,19 @@ class ASPPNet(nn.Module):
                                             stride=1, padding=padding, dilation=dilation, bias=False)
         self.bn = nn.BatchNorm2d(planes, eps=1e-03)
         self.relu = nn.ReLU()
-
+       
+        self.pointwise = nn.Conv2d(inplanes, planes, 1, 1, 0, 1, 1, bias=False) if pointwise else None
+       
         self._init_weight()
 
     def forward(self, x):
         x = self.atrous_convolution(x)
         x = self.bn(x)
-
-        return self.relu(x)
+        x = self.relu(x)
+        if self.pointwise is not None:
+            x = self.pointwise(x) 
+            x = self.relu(x)
+        return x
 
     def _init_weight(self):
         for m in self.modules():
@@ -46,19 +51,18 @@ class MFIA(nn.Module):
         self.height = cfg.img_height // fea_stride
         self.width = cfg.img_width // fea_stride
         self.alpha = cfg.mfia.alpha
-        conv_stride = cfg.mfia.conv_stride
-        
+        pointwise = cfg.mfia.pointwise
         dilations = [1,2,4,8]
-        self.global_avg_pool = nn.Sequential(nn.AdaptiveAvgPool2d((1, 1)))
+        # self.global_avg_pool = nn.Sequential(nn.AdaptiveAvgPool2d((1, 1)))
         for i in range(self.iter):
-            conv_vert1 = ASPPNet(chan, chan, dilation=dilations[0])
-            conv_vert2 = ASPPNet(chan, chan, dilation=dilations[1])
+            conv_vert1 = ASPP_module(chan, chan, dilation=dilations[0], pointwise=pointwise)
+            conv_vert2 = ASPP_module(chan, chan, dilation=dilations[1], pointwise=pointwise)
 
             setattr(self, 'conv_d'+str(i), conv_vert1)
             setattr(self, 'conv_u'+str(i), conv_vert2)
 
-            conv_hori1 = ASPPNet(chan, chan, dilation=dilations[2])
-            conv_hori2 = ASPPNet(chan, chan, dilation=dilations[3])
+            conv_hori1 = ASPP_module(chan, chan, dilation=dilations[2], pointwise=pointwise)
+            conv_hori2 = ASPP_module(chan, chan, dilation=dilations[3], pointwise=pointwise)
             setattr(self, 'conv_r'+str(i), conv_hori1)
             setattr(self, 'conv_l'+str(i), conv_hori2)
 
@@ -100,7 +104,7 @@ class DetailHead(nn.Module):
     def __init__(self,cfg=None):
         super(DetailHead, self).__init__()
         self.cfg = cfg
-        self.conv1x1 = nn.Conv2d(128, cfg.num_classes, kernel_size=1, stride=1, bias=False)
+        self.conv1x1 = nn.Conv2d(self.cfg.mfia.input_channel, cfg.num_classes, kernel_size=1, stride=1, bias=False)
     def forward(self, x):
         x = F.interpolate(x,size=[self.cfg.img_height,  self.cfg.img_width],
                            mode='bilinear', align_corners=False)
@@ -112,7 +116,7 @@ class ExistHead(nn.Module):
         super(ExistHead, self).__init__()
         self.cfg = cfg
         self.dropout = nn.Dropout2d(0.1)  
-        self.fc = nn.Linear(128, cfg.num_classes-1)
+        self.fc = nn.Linear(self.cfg.mfia.input_channel, cfg.num_classes-1)
     def forward(self, x):
         x = self.dropout(x)
         x = torch.squeeze(x)
@@ -129,13 +133,14 @@ class MFIALane(nn.Module):
         self.mfia = MFIA(cfg)
         self.decoder = eval(cfg.decoder)(cfg)
         self.heads = ExistHead(cfg) 
+        # self.ca = False if 'CULane' not in cfg.dataset_path else True
         self.global_avg_pool = nn.Sequential(nn.AdaptiveAvgPool2d((1, 1)))
     def forward(self, batch):
-        feat = self.backbone(batch)
-        feat = self.mfia(feat)
-        avg_feat = self.global_avg_pool(feat) 
-        feat = feat * avg_feat
-        seg = self.decoder(feat)
-        exist = self.heads(avg_feat)
+        fea = self.backbone(batch)
+        fea = self.mfia(fea)
+        avg_fea = self.global_avg_pool(fea) 
+        fea = fea * avg_fea
+        seg = self.decoder(fea)
+        exist = self.heads(avg_fea)
         output = {'seg': seg, 'exist': exist}
         return output

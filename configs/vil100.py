@@ -18,12 +18,13 @@ mfia = dict(
     iter=2,
     input_channel=128,
     conv_stride=9,
+    pointwise=False,
 )
 
 decoder = 'PlainDecoder'        
 
 trainer = dict(
-    type='MFIA'
+    type='Lane'
 )
 
 evaluator = dict(

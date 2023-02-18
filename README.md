@@ -9,7 +9,7 @@ https://user-images.githubusercontent.com/39958763/162392004-0dbfcfb9-ee63-4a9d-
 
 
 ## Introduction
-![intro](arch.png "intro")
+![intro](./log/arch.png "intro")
 - MFIALane achieves SOTA results on VIL-100, CULane, and Tusimple Dataset.
 
 ## Get started

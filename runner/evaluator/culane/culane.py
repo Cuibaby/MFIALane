@@ -1,8 +1,10 @@
 import torch.nn as nn
 import torch
 import torch.nn.functional as F
+import os.path as osp
+import cv2
 from runner.logger import get_logger
-
+import logging
 from runner.registry import EVALUATOR 
 import json
 import os
@@ -94,7 +96,8 @@ class CULane(nn.Module):
         self.blur = torch.nn.Conv2d(
             5, 5, 9, padding=4, bias=False, groups=5).cuda()
         torch.nn.init.constant_(self.blur.weight, 1 / 81)
-        self.logger = get_logger('MFIALane')
+        self.logger = logging.getLogger(__name__)
+        
         self.out_dir = os.path.join(self.cfg.work_dir, 'lines')
         if cfg.view:
             self.view_dir = os.path.join(self.cfg.work_dir, 'vis')
@@ -140,6 +143,11 @@ class CULane(nn.Module):
 
             if self.cfg.view:
                 img = cv2.imread(img_path[i]).astype(np.float32)
+                file_path = os.path.join(self.cfg.work_dir, 'ori')+img_name[i]
+                if file_path is not None:
+                    if not os.path.exists(osp.dirname(file_path)):
+                        os.makedirs(osp.dirname(file_path))
+                cv2.imwrite(file_path, img)
                 dataset.view(img, coords, self.view_dir+img_name[i])
 
 
@@ -158,8 +166,11 @@ class CULane(nn.Module):
             TP += val_tp
             FP += val_fp
             FN += val_fn
+            
+           
             self.logger.info(k + ': ' + str(v))
             out_str += k
+            
             for metric, value in v.items():
                 out_str += ' ' + str(value).rstrip('\n')
             out_str += ' '
