@@ -20,7 +20,12 @@ def arg_set():
     parser.add_argument('config', help='train config file path')
     parser.add_argument('--gpus', type=int, default=0, nargs='+',
                         help='SGD momentum (default: 0.5)')
-
+    parser.add_argument(
+        '--shape',
+        type=int,
+        nargs='+',
+        default=[288, 800],
+        help='input image size')
     args = parser.parse_args()
     return args
 

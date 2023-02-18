@@ -4,12 +4,12 @@ Aggregator Network for Lane Detection]".
 Good news! ! ! Our paper was accepted by IEEE Transactions on Intelligent Transportation Systems.
 
 
-## VIL-100 demo
+## VIL100 demo
 https://user-images.githubusercontent.com/39958763/162392004-0dbfcfb9-ee63-4a9d-8a79-0414043ee3de.mp4
 
 
 ## Introduction
-![intro](arch.png "intro")
+![intro](./log/arch.png "intro")
 - MFIALane achieves SOTA results on VIL-100, CULane, and Tusimple Dataset.
 
 ## Get started
@@ -41,12 +41,12 @@ https://user-images.githubusercontent.com/39958763/162392004-0dbfcfb9-ee63-4a9d-
 
 4. Data preparation
 
-    Download [VIL-100](https://github.com/yujun0-0/MMA-Net/tree/main/dataset), [CULane](https://xingangpan.github.io/projects/CULane.html) and [Tusimple](https://github.com/TuSimple/tusimple-benchmark/issues/3). Then extract them to  `$VIL-100ROOT` `$CULANEROOT` and `$TUSIMPLEROOT`. Create link to `data` directory.
+    Download [VIL100](https://github.com/yujun0-0/MMA-Net/tree/main/dataset), [CULane](https://xingangpan.github.io/projects/CULane.html) and [Tusimple](https://github.com/TuSimple/tusimple-benchmark/issues/3). Then extract them to  `$VIL100ROOT` `$CULANEROOT` and `$TUSIMPLEROOT`. Create link to `data` directory.
     
     ```Shell
     cd $MFIALane_ROOT
     mkdir -p data
-    ln -s $VIL-100ROOT data/VIL-100
+    ln -s $VIL-100ROOT data/VIL100
     ln -s $CULANEROOT data/CULane
     ln -s $TUSIMPLEROOT data/tusimple
     ```
@@ -73,6 +73,16 @@ https://user-images.githubusercontent.com/39958763/162392004-0dbfcfb9-ee63-4a9d-
     python tools/generate_seg_tusimple.py --root $TUSIMPLEROOT
     # this will generate seg_label directory
     ```
+    For VIL100, you should have structure like this:
+    ```
+    $VIL100ROOT/Annotations 
+    $VIL100ROOT/data 
+    $VIL100ROOT/JPEGImages
+    $VIL100ROOT/Json
+    $VIL100ROOT/list
+    $VIL100ROOT/test
+
+    ```
 
 5. Install CULane evaluation tools. 
 
@@ -87,40 +97,46 @@ https://user-images.githubusercontent.com/39958763/162392004-0dbfcfb9-ee63-4a9d-
     ```
     
     Note that, the default `opencv` version is 3. If you use opencv2, please modify the `OPENCV_VERSION := 3` to `OPENCV_VERSION := 2` in the `Makefile`.
-
+    
+    If you have problems installing the C++ version, you can remove the $lane_evaluation and change the 'type=Py_CULane' in the config file to use the pure Python version for evaluation.
 
 ## Training
 
 For training, run
 
 ```Shell
-python main.py [configs/path_to_your_config] --gpus [gpu_ids]
+CUDA_VISIBLE_DEVICES=0,1,2,3,4 python main.py [configs/path_to_your_config] --gpus [gpu_ids]
 ```
 
 
 For example, run
 ```Shell
-python main.py configs/culane.py --gpus 0 1 2 3
+CUDA_VISIBLE_DEVICES=0,1,2,3,4 python main.py configs/culane.py --gpus 0 1 2 3
 ```
 
 ## Testing
 For testing, run
 ```Shell
-python main.py c[configs/path_to_your_config] --validate --load_from [path_to_your_model] [gpu_num]
+CUDA_VISIBLE_DEVICES=0,1,2,3,4 python main.py c[configs/path_to_your_config] --validate --load_from [path_to_your_model] [gpu_num]
 ```
 
 For example, run
 ```Shell
-python main.py configs/culane.py --validate --load_from culane_resnet50.pth --gpus 0 1 2 3
+CUDA_VISIBLE_DEVICES=0,1,2,3,4 python main.py configs/culane.py --validate --load_from culane.pth --gpus 0 1 2 3
 
-python main.py configs/tusimple.py --validate --load_from tusimple_resnet34.pth --gpus 0 1 2 3
+CUDA_VISIBLE_DEVICES=0,1,2,3,4 python main.py configs/tusimple.py --validate --load_from tusimple.pth --gpus 0 1 2 3
+
+CUDA_VISIBLE_DEVICES=0,1,2,3,4 python main.py configs/vilane.py --validate --load_from vilane.pth --gpus 0 1 2 3
 ```
 
 
-We provide two trained ResNet models on VIL-100, CULane and Tusimple, downloading our best performed model(comming soon).
-<!-- (Tusimple: [GoogleDrive](https://drive.google.com/file/d/1M1xi82y0RoWUwYYG9LmZHXWSD2D60o0D/view?usp=sharing)/[BaiduDrive(code:s5ii)](https://pan.baidu.com/s/1CgJFrt9OHe-RUNooPpHRGA),
-CULane: [GoogleDrive](https://drive.google.com/file/d/1pcqq9lpJ4ixJgFVFndlPe42VgVsjgn0Q/view?usp=sharing)/[BaiduDrive(code:rlwj)](https://pan.baidu.com/s/1ODKAZxpKrZIPXyaNnxcV3g), VIL-100: [GoogleDrive](https://drive.google.com/file/d/1M1xi82y0RoWUwYYG9LmZHXWSD2D60o0D/view?usp=sharing)/[BaiduDrive(code:s5ii)](https://pan.baidu.com/s/1CgJFrt9OHe-RUNooPpHRGA)
-) -->
+We provide three trained ResNet models on VIL100, CULane and Tusimple.
+
+|  Dataset | Backbone| Metric paper | Metric This repo |    Model    |
+|:--------:|:------------:|:------------:|:----------------:|:-------------------:|
+| VIL100 |  ResNet34 |   90.5    |       90.5         | [GoogleDrive](https://drive.google.com/file/d/1KFBMxsneDjFkmCIwdI3iEVZdutEZiUfu/view?usp=sharing)/[BaiduDrive(code:bghd)](https://pan.baidu.com/s/1rPC_irYqccWvV0lCefXvTw?pwd=1111) |
+| Tusimple |  ResNet18 | 96.83    |       96.83      |   [GoogleDrive](https://drive.google.com/file/d/1vulUJP8sJ1oNZUAScyB6dqdjBrGnKivh/view?usp=sharing)/[BaiduDrive(code:bghd)](https://pan.baidu.com/s/1iGTfIZnyCaNn5Y9p_WMb8g?pwd=1111) |
+|  CULane  |  ResNet34 |   76.1    |       76.1       |    [GoogleDrive](https://drive.google.com/file/d/1zXBRTw50WOzvUp6XKsi8Zrk3MUC3uFuq/view?usp=sharing)/[BaiduDrive(code:w9tw)](https://pan.baidu.com/s/19Ig0TrV8MfmFTyCvbSa4ag) |
 
 ## Visualization
 Just add `--view`.
