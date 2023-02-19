@@ -143,7 +143,7 @@ Just add `--view`.
 
 For example:
 ```Shell
-python main.py configs/culane.py --validate --load_from culane_resnet50.pth --gpus 0 1 2 3 --view
+python main.py configs/culane.py --validate --load_from culane.pth --gpus 0 1 2 3 --view
 ```
 You will get the result in the directory: `work_dirs/[DATASET]/xxx/vis`.
 
