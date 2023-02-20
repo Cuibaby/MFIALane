@@ -99,7 +99,7 @@ def generate_label(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--root', required=True, help='The root of the Tusimple dataset')
-    parser.add_argument('--savedir', type=str, default='seg_truth', help='The root of the Tusimple dataset')
+    parser.add_argument('--savedir', type=str, default='seg_label', help='The root of the Tusimple dataset')
     args = parser.parse_args()
 
     generate_label(args)
