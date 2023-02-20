@@ -14,7 +14,7 @@ class Detector(nn.Module):
         self.aggregator = build_aggregator(cfg) if cfg.haskey('aggregator') else None
         self.neck = build_necks(cfg) if cfg.haskey('neck') else None
         self.heads = build_heads(cfg)
-        self.global_avg_pool = nn.Sequential(nn.AdaptiveAvgPool2d((1, 1))) if cfg.hasgkey('ca') else None
+        self.global_avg_pool = nn.Sequential(nn.AdaptiveAvgPool2d((1, 1))) if cfg.haskey('ca') else None
     def get_lanes(self, output):
         return self.heads.get_lanes(output)
 
