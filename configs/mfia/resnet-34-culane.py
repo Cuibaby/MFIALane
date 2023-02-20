@@ -29,7 +29,9 @@ heads = dict(
     thr=0.25,
     sample_y=sample_y,
 )
-
+ca = dict(
+    type='CA'
+ )
 trainer = dict(
     type='MFIA'
 )
