@@ -28,6 +28,9 @@ heads = dict(
     thr=0.6,
     sample_y=sample_y,
 )
+ca = dict(
+    type='CA'
+ )
 
 optimizer = dict(
   type = 'SGD',
