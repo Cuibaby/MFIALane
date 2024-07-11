@@ -150,6 +150,17 @@ You will get the result in the directory: `work_dirs/[DATASET]/xxx/vis`.
 ## Citation
 
 ```BibTeX
+@ARTICLE{10507728,
+  author={Zhao, Jing and Qiu, Zengyu and Hu, Huiqin and Sun, Shiliang},
+  journal={IEEE Transactions on Intelligent Transportation Systems}, 
+  title={HWLane: HW-Transformer for Lane Detection}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={1-11},
+  keywords={Lane detection;Feature extraction;Computational modeling;Task analysis;Visualization;Current transformers;Convolutional neural networks;Deep learning;lane detection;transformer;self-knowledge distillation},
+  doi={10.1109/TITS.2024.3386531}}
+
 @ARTICLE{9872124,  
 author={Qiu, Zengyu and Zhao, Jing and Sun, Shiliang},  
 journal={IEEE Transactions on Intelligent Transportation Systems},   
